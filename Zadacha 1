@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <malloc.h>
+
+int main() {
+    int num1, num2, count;
+
+    printf("Задайте размер 1-го множества:");
+    scanf("%i", &num1);
+    printf("ВведЗадайтеите размер 2-го множества:");
+    scanf("%i", &num2);
+    int *arr1;
+    int *arr2;
+    arr1 = (int*)malloc(num1 * sizeof(int));
+    arr2 = (int*)malloc(num2 * sizeof(int));
+
+    for (int j = 0; j < num1; j++)
+    {
+        printf("Задайте %i-й элемент 1-го множества:", j + 1);
+        scanf("%i", &arr1[j]);
+    }
+    for (int j = 0; j < num2; j++)
+    {
+        printf("Задайте %i-й элемент 2-го множества:", j + 1);
+        scanf("%i", &arr2[j]);
+    }
+
+    printf("Cколько добавить элементов в первое множество?: ");
+    scanf("%d", &count);
+    arr1 = (int*)realloc(arr1, (num1 + count) * sizeof(int));
+
+    for (int i = 0; i < count; i++)
+    {
+        printf("Введите %d-й элемент:", i + 1);
+        scanf("%i", &arr1[num1 + i]);
+    }
+    num1 += count;
+
+    printf("Cколько добавить элементов во второе множество?: ");
+    scanf("%d", &count);
+    arr2 = (int*)realloc(arr2, (num2 + count) * sizeof(int));
+
+    for (int i = 0; i < count; i++)
+    {
+        printf("Введите %d-й элемент:", i + 1);
+        scanf("%i", &arr2[num2 + i]);
+    }
+    num2 += count;
+
+    printf("Количество элементов первого множества: %d\nВведите № элемента, который хотите удалить: ", num1);
+    scanf("%i", &count);
+    for(int i = (count - 1); i < (num1 - 1); i++)
+    {
+        arr1[i] = arr1[i + 1];
+    }
+    arr1 = (int*)realloc(arr1, (num1 - 1) * sizeof(int));
+    num1--;
+
+
+    printf("Количество элементов второго множества: %d\nВведите № элемента, который хотите удалить: ", num2);
+    scanf("%i", &count);
+    for(int i = (count - 1); i < (num2 - 1); i++)
+    {
+        arr2[i] = arr2[i + 1];
+    }
+    arr2 = (int*)realloc(arr2, (num2 - 1) * sizeof(int));
+    num2--;
+
+    printf("Элементы 1-го множества:\n");
+    for(int i = 0; i < num1; i++)
+    {
+        printf("%d\n", arr1[i]);
+    }
+
+    printf("Элементы 2-го множества:\n");
+    for(int i = 0; i < num2; i++)
+    {
+        printf("%d\n", arr2[i]);
+    }
+
+    return 0;
+}
